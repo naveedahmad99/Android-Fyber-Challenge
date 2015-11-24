@@ -1,0 +1,63 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.1"
+
+    defaultConfig {
+        applicationId "com.fyber.naveedahmad.androidfyberchallenge"
+        minSdkVersion 16
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', 'HOST', '"http://api.fyber.com"'
+        }
+
+        debug {
+            // host may be change between release and debug builds
+            buildConfigField 'String', 'HOST', '"http://api.fyber.com"'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile('junit:junit:4.12') {
+        exclude(module: 'hamcrest-core')
+    }
+    provided 'org.roboguice:roboblender:3.+'
+    compile 'com.android.support:appcompat-v7:23.1.1'
+    compile 'com.android.support:design:23.1.1'
+    compile 'com.android.support:cardview-v7:23.1.1'
+    compile 'com.android.support:recyclerview-v7:23.1.1'
+    compile 'com.google.android.gms:play-services-ads:8.3.0'
+    compile 'org.roboguice:roboguice:3.+'
+    compile 'com.squareup.retrofit:retrofit:1.9.0'
+    compile 'com.squareup.okhttp:okhttp-ws:2.4.0'
+    compile 'com.squareup:otto:1.3.8'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'commons-codec:commons-codec:1.9'
+
+    androidTestCompile('com.android.support.test.espresso:espresso-contrib:2.0') {
+        exclude group: 'com.android.support', module: 'appcompat'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude module: 'recyclerview-v7'
+    }
+
+    // testing libraries
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.0'
+    androidTestCompile 'com.android.support.test:testing-support-lib:0.1'
+    androidTestCompile 'org.hamcrest:hamcrest-library:1.1'
+
+    // Set this dependency if you want to use Mockito
+    testCompile 'org.mockito:mockito-core:1.10.19'
+    // Set this dependency if you want to use Hamcrest matching
+    testCompile 'org.hamcrest:hamcrest-library:1.1'
+    testCompile 'junit:junit:4.12'
+}
+
